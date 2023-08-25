@@ -2,6 +2,7 @@ package com.hailong.www.controller;
 
 import com.hailong.www.mapper.UserMapper;
 import com.hailong.www.model.User;
+import com.hailong.www.service.UserService;
 import jakarta.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +15,8 @@ import java.util.List;
 public class UserController {
     @Resource
     private UserMapper userMapper;
+    @Resource
+    private UserService userService;
 
     /**
      * 插入数据
@@ -25,7 +28,8 @@ public class UserController {
         user.setAge(33);
         user.setName("hailong");
         user.setEmail("506698652@qq.com");
-        return userMapper.insert(user);
+        return userService.add(user);
+//        return userMapper.insert(user);
     }
 
     /**

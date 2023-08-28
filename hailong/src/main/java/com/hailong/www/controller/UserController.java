@@ -5,6 +5,7 @@ import com.hailong.www.model.User;
 import com.hailong.www.service.UserService;
 import jakarta.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,6 +18,9 @@ public class UserController {
     private UserMapper userMapper;
     @Resource
     private UserService userService;
+
+    @Resource
+    private RedisTemplate redisTemplate;
 
     /**
      * 插入数据
@@ -71,5 +75,16 @@ public class UserController {
     public List<User> list() {
         List<User> userList = userMapper.selectList(null);
         return userList;
+    }
+
+    /**
+     * redis 测试
+     * @return
+     */
+    @RequestMapping("/redis")
+    public Object redis(){
+        redisTemplate.opsForValue().set("key-01","value-02");
+        Object key01 = redisTemplate.opsForValue().get("key-01");
+        return key01;
     }
 }

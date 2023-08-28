@@ -28,8 +28,8 @@ public class UserController {
         user.setAge(33);
         user.setName("hailong");
         user.setEmail("506698652@qq.com");
-        return userService.add(user);
-//        return userMapper.insert(user);
+        return userService.add(user);/*mybatis*/
+//        return userMapper.insert(user);/*mybatis plus*/
     }
 
     /**

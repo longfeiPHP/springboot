@@ -6,7 +6,9 @@ import com.hailong.www.mapper.UserMapper;
 import com.hailong.www.model.User;
 import com.hailong.www.service.UserService;
 import jakarta.annotation.Resource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,8 +23,10 @@ public class UserController {
     private UserMapper userMapper;
     @Resource
     private UserService userService;
-    @Resource
-    private RedisTemplate redisTemplate;
+    @Autowired
+    private StringRedisTemplate stringRedisTemplate;
+    @Autowired
+    private RedisTemplate<Object, Object> redisTemplate;
 
     /**
      * 插入数据
@@ -86,16 +90,22 @@ public class UserController {
     @RequestMapping("/redis")
     public Object redis() throws JsonProcessingException {
         /*存取 字符串*/
-        redisTemplate.opsForValue().set("key-01","value-02");
-        Object key01 = redisTemplate.opsForValue().get("key-01");
-        return key01;
+//        stringRedisTemplate.opsForValue().set("key-01","value-02");
+//        Object key01 = stringRedisTemplate.opsForValue().get("key-01");
+//        return key01;
 
         /*对象转json 然后存redis*/
 //        User user = userMapper.selectById(3);
 //        JsonMapper jsonMapper = new JsonMapper();
 //        String userStr = jsonMapper.writeValueAsString(user);
-//        redisTemplate.opsForValue().set("user-string",userStr);
-//        Object redisUserString = redisTemplate.opsForValue().get("user-string");
+//        stringRedisTemplate.opsForValue().set("user-string",userStr);
+//        Object redisUserString = stringRedisTemplate.opsForValue().get("user-string");
 //        return redisUserString;
+
+        /*对象直接存redis*/
+        User user = userMapper.selectById(3);
+        redisTemplate.opsForValue().set("userModel",user);
+        Object userRedis = redisTemplate.opsForValue().get("userModel");
+        return userRedis;
     }
 }

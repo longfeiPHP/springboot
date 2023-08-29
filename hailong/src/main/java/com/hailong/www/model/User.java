@@ -2,10 +2,16 @@ package com.hailong.www.model;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
+
+@AllArgsConstructor
+@NoArgsConstructor
 @Data
-public class User {
+public class User implements Serializable {
     @TableId(type = IdType.AUTO)/*主键自增*/
     private Integer id;/*主键id*/
     private String name;/*姓名*/

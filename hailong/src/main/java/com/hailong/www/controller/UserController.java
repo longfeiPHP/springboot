@@ -104,8 +104,9 @@ public class UserController {
 
         /*对象直接存redis*/
         User user = userMapper.selectById(3);
-        redisTemplate.opsForValue().set("userModel",user);
-        Object userRedis = redisTemplate.opsForValue().get("userModel");
-        return userRedis;
+        String userKey = "userModel";
+        redisTemplate.opsForValue().set(userKey,user);
+        User u = (User) redisTemplate.opsForValue().get(userKey);
+        return u;
     }
 }

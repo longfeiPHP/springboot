@@ -24,7 +24,6 @@ public class AppConfig {
         return user;
     }
 
-    @ConfigurationProperties(prefix = "pig")
     @Bean
     public User user02() {
         var user = new User();
@@ -33,6 +32,7 @@ public class AppConfig {
         return user;
     }
 
+    @ConfigurationProperties(prefix = "pig")
     @Bean
     public Pig pig() {
         return new Pig();

@@ -1,5 +1,8 @@
 package com.hailong.www;
 
+import com.hailong.www.model.Pig;
+import com.hailong.www.model.Sheep;
+import com.hailong.www.model.User;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -9,7 +12,18 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class HailongApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(HailongApplication.class, args);
+		var ioc = SpringApplication.run(HailongApplication.class, args);
+//		for (String beanDefinitionName : ioc.getBeanDefinitionNames()) {
+//			System.out.println(beanDefinitionName);
+//		}
+//		for (String s : ioc.getBeanNamesForType(User.class)) {
+//			System.out.println(s);
+//		}
+//		var pig = ioc.getBean(Pig.class);
+//		System.out.println(pig);
+
+//		var sheep  = ioc.getBean(Sheep.class);
+//		System.out.println(sheep);
 	}
 
 }

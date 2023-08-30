@@ -3,6 +3,7 @@ package com.hailong.www.controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.hailong.www.mapper.UserMapper;
+import com.hailong.www.model.Pig;
 import com.hailong.www.model.User;
 import com.hailong.www.service.UserService;
 import jakarta.annotation.Resource;
@@ -27,9 +28,16 @@ public class UserController {
     private StringRedisTemplate stringRedisTemplate;
     @Autowired
     private RedisTemplate<Object, Object> redisTemplate;
+    @Autowired
+    private User user01;
+    @Autowired
+    private User user02;
+    @Autowired
+    private Pig pig;
 
     /**
      * 插入数据
+     *
      * @return 插入的条数据
      */
     @RequestMapping("insert")
@@ -44,19 +52,21 @@ public class UserController {
 
     /**
      * 删除一条数据
+     *
      * @return 删除的条数
      */
     @RequestMapping("delete")
-    public int delete(){
+    public int delete() {
         return userMapper.deleteById(6);
     }
 
     /**
      * 更新一条数据
+     *
      * @return
      */
     @RequestMapping("update")
-    public int update(){
+    public int update() {
         User user = userMapper.selectById(7);
         user.setName("海龙");
         return userMapper.updateById(user);
@@ -64,11 +74,11 @@ public class UserController {
 
     /**
      * 根据id查找一条数据
+     *
      * @return
      */
     @RequestMapping("select")
-    public User select()
-    {
+    public User select() {
         return userMapper.selectById(7);
     }
 
@@ -85,6 +95,7 @@ public class UserController {
 
     /**
      * redis 测试
+     *
      * @return
      */
     @RequestMapping("/redis")
@@ -105,8 +116,15 @@ public class UserController {
         /*对象直接存redis*/
         User user = userMapper.selectById(3);
         String userKey = "userModel";
-        redisTemplate.opsForValue().set(userKey,user);
+        redisTemplate.opsForValue().set(userKey, user);
         User u = (User) redisTemplate.opsForValue().get(userKey);
         return u;
+    }
+
+    @RequestMapping("test")
+    public String test() {
+//        return user01.getName();
+//        return user02.getName();
+        return pig.getName();
     }
 }

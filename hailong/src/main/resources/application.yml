@@ -12,3 +12,21 @@ spring:
 mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+person:
+  name: 张三
+  age: 18
+  birthday: 2012/10/12 12:12:20
+  like: true
+  child:
+    name: lisi
+    age: 20
+    birthday: 2022/11/22 12:10:20
+    text: [ "abc","def" ]
+  dogs:
+    - name: 旺财
+      age: 3
+  cats:
+    c1:
+      id: 1
+      name: 小猫

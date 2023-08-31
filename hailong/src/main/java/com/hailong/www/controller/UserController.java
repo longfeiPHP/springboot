@@ -7,6 +7,9 @@ import com.hailong.www.model.Pig;
 import com.hailong.www.model.User;
 import com.hailong.www.service.UserService;
 import jakarta.annotation.Resource;
+import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -19,6 +22,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/user")
+@Slf4j
 public class UserController {
     @Resource
     private UserMapper userMapper;
@@ -126,5 +130,11 @@ public class UserController {
 //        return user01.getName();
 //        return user02.getName();
         return pig.getName();
+    }
+
+    @RequestMapping("log")
+    public String log(){
+        log.info("记录日志了");
+        return "hello";
     }
 }

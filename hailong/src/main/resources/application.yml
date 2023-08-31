@@ -4,7 +4,7 @@ spring:
     url: jdbc:mysql://localhost:3306/test?useSSL=false&characterEncoding=utf-8&useUnicode=true
     driver-class-name: com.mysql.jdbc.Driver
     username: root
-    password: 123456
+    password: abc999999
   data:
     redis:
       host: 127.0.0.1
@@ -30,3 +30,15 @@ person:
     c1:
       id: 1
       name: 小猫
+server:
+  port: 8089
+logging:
+  level:
+    root: info
+    com.hailong.www.controller: info
+  file:
+    name: ./log/springboot.log
+#  logback:
+#    rollingpolicy:
+#      file-name-pattern: ${LOG_FILE}.%d{yyyy-MM-dd}.$i.gz
+#      max-file-size: 1MB

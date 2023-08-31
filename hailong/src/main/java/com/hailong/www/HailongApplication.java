@@ -25,8 +25,8 @@ public class HailongApplication {
 
 //		var sheep  = ioc.getBean(Sheep.class);
 //		System.out.println(sheep);
-		var person = ioc.getBean(Person.class);
-		System.out.println(person);
+//		var person = ioc.getBean(Person.class);
+//		System.out.println(person);
 	}
 
 }

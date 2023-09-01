@@ -9,6 +9,13 @@ spring:
     redis:
       host: 127.0.0.1
       port: 6379
+  web:
+    resources:
+      add-mappings: true
+      cache:
+        period: 3600
+        cachecontrol:
+          max-age: 7200
 mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

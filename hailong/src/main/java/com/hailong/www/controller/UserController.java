@@ -3,10 +3,12 @@ package com.hailong.www.controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.hailong.www.mapper.UserMapper;
+import com.hailong.www.model.Person;
 import com.hailong.www.model.Pig;
 import com.hailong.www.model.User;
 import com.hailong.www.service.UserService;
 import jakarta.annotation.Resource;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,6 +40,8 @@ public class UserController {
     private User user02;
     @Autowired
     private Pig pig;
+    @Autowired
+    private Person person;
 
     /**
      * 插入数据
@@ -133,8 +137,18 @@ public class UserController {
     }
 
     @RequestMapping("log")
-    public String log(){
-        log.info("记录日志了");
+    public String log(HttpServletRequest request){
+        log.info("request");
+        log.info(request.getRequestURI());
         return "hello";
     }
+
+
+    @RequestMapping("/person")
+    public Person person(){
+        person.setName("hailong123456");
+        person.setAge(33);
+        return  person;
+    }
+
 }

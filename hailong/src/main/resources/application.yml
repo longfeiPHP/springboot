@@ -16,6 +16,10 @@ spring:
         period: 3600
         cachecontrol:
           max-age: 7200
+  mvc:
+    contentnegotiation:
+      favor-parameter: true #使用参数进行内容协商
+      parameter-name: type #指定内容协商使用的参数
 mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

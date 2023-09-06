@@ -93,7 +93,9 @@ public class UserController {
      */
     @RequestMapping("select")
     public User select() {
-        return userMapper.selectById(7);
+        User user = userMapper.selectById(7);
+        user.setSchool(schoolMapper.getSchoolById(user.getSchoolId()));
+        return user;
     }
 
     /**

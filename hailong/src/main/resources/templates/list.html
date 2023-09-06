@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>循环</title>
+</head>
+<body>
+<table>
+    <tr th:each="person,status:${list}">
+        <td th:text="${person.name}"></td>
+        <td th:text="${person.age}"></td>
+        <td th:text="${person.birthday}"></td>
+        <td>[[${status.index}]]===[[${status.count}]]===[[${status.size}]]</td>
+    </tr>
+</table>
+</body>
+</html>

@@ -49,7 +49,3 @@ logging:
     com.hailong.www.controller: info
   file:
     name: ./log/springboot.log
-#  logback:
-#    rollingpolicy:
-#      file-name-pattern: ${LOG_FILE}.%d{yyyy-MM-dd}.$i.gz
-#      max-file-size: 1MB

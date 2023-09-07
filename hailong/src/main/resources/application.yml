@@ -46,7 +46,7 @@ person:
       id: 1
       name: 小猫
 server:
-  port: 8089
+  port: 8086
 logging:
   level:
     root: info

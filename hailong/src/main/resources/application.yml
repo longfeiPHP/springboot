@@ -20,6 +20,10 @@ spring:
     contentnegotiation:
       favor-parameter: true #使用参数进行内容协商
       parameter-name: type #指定内容协商使用的参数
+  banner:
+    location: classpath:banner.txt
+  profiles:
+    active: dev #激活环境
 mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

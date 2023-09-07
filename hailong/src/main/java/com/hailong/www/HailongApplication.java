@@ -5,6 +5,7 @@ import com.hailong.www.model.Pig;
 import com.hailong.www.model.Sheep;
 import com.hailong.www.model.User;
 import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.boot.Banner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -13,7 +14,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class HailongApplication {
 
 	public static void main(String[] args) {
-		var ioc = SpringApplication.run(HailongApplication.class, args);
+//		var ioc = SpringApplication.run(HailongApplication.class, args);
 //		for (String beanDefinitionName : ioc.getBeanDefinitionNames()) {
 //			System.out.println(beanDefinitionName);
 //		}
@@ -27,6 +28,10 @@ public class HailongApplication {
 //		System.out.println(sheep);
 //		var person = ioc.getBean(Person.class);
 //		System.out.println(person);
+
+		SpringApplication springApplication = new SpringApplication(HailongApplication.class);
+		/*设置spring boot 的配置.............*/
+		springApplication.run();
 	}
 
 }

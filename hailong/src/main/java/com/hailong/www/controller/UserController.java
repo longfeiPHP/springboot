@@ -2,6 +2,8 @@ package com.hailong.www.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.json.JsonMapper;
+import com.hailong.www.event.EventPublish;
+import com.hailong.www.event.LoginSuccessEvent;
 import com.hailong.www.mapper.SchoolMapper;
 import com.hailong.www.mapper.UserMapper;
 import com.hailong.www.model.Person;
@@ -19,10 +21,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -48,6 +47,9 @@ public class UserController {
     private Person person;
     @Autowired
     private SchoolMapper schoolMapper;
+
+    @Autowired
+    private EventPublish eventPublish;
 
     /**
      * 插入数据
@@ -145,7 +147,7 @@ public class UserController {
     }
 
     @RequestMapping("log")
-    public String log(HttpServletRequest request){
+    public String log(HttpServletRequest request) {
         log.info("request");
         log.info(request.getRequestURI());
         return "hello";
@@ -153,15 +155,25 @@ public class UserController {
 
 
     @RequestMapping("/person")
-    public Person person(){
+    public Person person() {
         person.setName("hailong123456");
         person.setAge(33);
-        return  person;
+        return person;
     }
 
     @GetMapping("school/{id}")
-    public School getSchool(@PathVariable("id") Long id){
+    public School getSchool(@PathVariable("id") Long id) {
         return schoolMapper.getSchoolById(id);
+    }
+
+    @GetMapping("login")
+    public String login(@RequestParam("username") String username, @RequestParam("passwd") String passwd) {
+
+        User user = new User();
+        user.setName(username);
+        LoginSuccessEvent event = new LoginSuccessEvent(user);
+        eventPublish.sendEvent(event);
+        return username + "登录成功";
     }
 
 }

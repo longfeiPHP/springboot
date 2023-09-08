@@ -1,0 +1,2 @@
+#自定义 spring boot 启动的监听器
+org.springframework.boot.SpringApplicationRunListener=com.hailong.www.listener.MyAppListener

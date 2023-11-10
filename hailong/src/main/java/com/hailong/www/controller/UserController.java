@@ -21,6 +21,8 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -57,13 +59,23 @@ public class UserController {
      * @return 插入的条数据
      */
     @RequestMapping("insert")
+    @Transactional(rollbackFor = Exception.class)
     public int insert() {
-        User user = new User();
-        user.setAge(33);
-        user.setName("hailong");
-        user.setEmail("506698652@qq.com");
-        return userService.add(user);/*mybatis*/
+        try {
+            User user = new User();
+            user.setAge(22);
+            user.setName("李海龙");
+            user.setEmail("506698652@qq.com");
+            userService.add(user);/*mybatis*/
+            user.setAge(23);
+            user.setName("李海龙");
+            user.setEmail("506698652@qq.com");
+            userService.add(user);/*mybatis*/
 //        return userMapper.insert(user);/*mybatis plus*/
+        }catch (Exception e){
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+        }
+        return 1;
     }
 
     /**
